@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Rest Steak</title>
+
+<!-- Font Awesome Icons -->
+<link href=./resources
+	/"vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+	type="text/css">
+
+<!-- Google Fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700"
+	rel="stylesheet">
+<link
+	href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic'
+	rel='stylesheet' type='text/css'>
+
+<!-- Plugin CSS -->
+<link href="./resources/vendor/magnific-popup/magnific-popup.css"
+	rel="stylesheet">
+
+<!-- Theme CSS - Includes Bootstrap -->
+<link href="./resources/css/creative.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3"
+		id="mainNav">
+		<div class="container">
+			<button class="navbar-toggler navbar-toggler-right" type="button"
+				data-toggle="collapse" data-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto my-2 my-lg-0">
+					<li class="nav-item text-nowrap"><a class="nav-link" href="#"
+						id="menu">Menu</a></li>
+					<li class="nav-item text-nowrap"><a class="nav-link" href="#"
+						id="myOrder">My Order</a></li>
+					<li class="nav-item text-nowrap"><a class="nav-link" href="#"
+						id="logout" onclick="redirect()">Sign Out</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Masthead -->
+	<header class="masthead">
+		<div class="container h-100">
+			<div
+				class="row h-100 align-items-center justify-content-center text-center"
+				id="menuPanel">
+				<div class="col-lg-10 align-self-end">
+					<h1 class="text-uppercase text-white font-weight-bold">Menu</h1>
+					<hr class="divider my-4">
+				</div>
+				<div class="col-lg-8 align-self-baseline bg-dark text-white">
+					<div class="form-group">
+						<label for="exampleInputPassword1">Steak</label> <select
+							class="form-control" id="steak">
+							<option value="" selected disabled hidden>Select Steak</option>
+							<option>10oz Rib Eye - €19.99</option>
+							<option>8oz Fillet - €24.99</option>
+							<option>8oz Sirloin - €19.99</option>
+							<option>10oz Sirloin - €22.99</option>
+							<option>16oz T-Bone - €28.99</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="exampleInputPassword1">Temperature</label> <select
+							class="form-control" id="temperature">
+							<option value="" selected disabled hidden>Select
+								Temperature</option>
+							<option>Rare</option>
+							<option>Medium Rare</option>
+							<option>Medium</option>
+							<option>Medium Well</option>
+							<option>Well</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="exampleInputPassword1">Side</label> <select
+							class="form-control" id="side">
+							<option value="" selected disabled hidden>Select Side</option>
+							<option>Sweet Potato Fries - €4.99</option>
+							<option>Steakhouse Fries - €3.99</option>
+							<option>Seasonal Veg - €2.99</option>
+							<option>Fondant Potatoes €4.99</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="exampleInputPassword1">Sauce</label> <select
+							class="form-control" id="sauce">
+							<option value="" selected disabled hidden>Select Sauce</option>
+							<option>Peppercorn Sauce</option>
+							<option>Bearnaise</option>
+							<option>Chimichurri</option>
+							<option>Salsa Verde</option>
+							<option>Bordelaise</option>
+						</select> <br> <a class="btn btn-primary btn-xl js-scroll-trigger"
+							id="makeOrder">Make Order</a>
+					</div>
+				</div>
+			</div>
+			<div
+				class="row h-100 align-items-center justify-content-center text-center"
+				id="myOrderPanel">
+				<div class="col-lg-10 align-self-end">
+					<h1 class="text-uppercase text-white font-weight-bold">My
+						Order</h1>
+					<hr class="divider my-4">
+				</div>
+				<div class="form-group" id="test">
+						<label for="Find Your Order For ID">ID:</label> <input
+							class="form-control" id="test">
+					</div>
+				<div class="col-lg-8 align-self-baseline bg-dark text-white">
+					<table id="dtOrderList" class="table table-dark">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>STEAK</th>
+								<th>TEMPERATURE</th>
+								<th>SIDE</th>
+								<th>SAUCE</th>
+								<th>STATUS</th>
+								<th>EDIT</th>
+							</tr>
+						</thead>
+						<!-- <tbody id="tbOrderDisplay">
+						</tbody> -->
+						<tbody>
+							<tr>
+								<th scope="row" id="updateSteakOrdered"></th>
+								<th scope="row" id="updateSteakTemperature"></th>
+								<th scope="row" id="updateSteakSide"></th>
+								<th scope="row" id="updateSteakSauce"></th>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<!-- Order Modal -->
+	<div id="orderModal" class="modal fade bd-example-modal-lg"
+		tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Your Order</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">OrderID</th>
+								<th scope="col">STEAK</th>
+								<th scope="col">TEMPERATURE</th>
+								<th scope="col">SIDE</th>
+								<th scope="col">SAUCE</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row" id="steakId"></th>
+								<th scope="row" id="steakOrdered"></th>
+								<th scope="row" id="steakTemperature"></th>
+								<th scope="row" id="steakSide"></th>
+								<th scope="row" id="steakSauce"></th>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="modal-footer">
+					<button id="deleteOrder" type="button" class="btn btn-danger"
+						data-dismiss="modal">Cancel Order</button>
+					<button id="confirmOrder" type="button" class="btn btn-success"
+						data-dismiss="modal">Confirm</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Update Order Modal-->
+	<div id="updateOrderModal" class="modal fade bd-example-modal-lg"
+		tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="userUpdateModalTitle">Update Order</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="userUpdateModalForm">
+						<div class="form-group">
+							<label for="exampleInputPassword1">Steak</label> <select
+								class="form-control" id="updateModalSteak">
+								<option value="" selected disabled hidden>Select Steak</option>
+								<option>10oz Rib Eye - €19.99</option>
+								<option>8oz Fillet - €24.99</option>
+								<option>8oz Sirloin - €19.99</option>
+								<option>10oz Sirloin - €22.99</option>
+								<option>16oz T-Bone - €28.99</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">Temperature</label> <select
+								class="form-control" id="updateModalTemperature">
+								<option value="" selected disabled hidden>Select
+									Temperature</option>
+								<option>Rare</option>
+								<option>Medium Rare</option>
+								<option>Medium</option>
+								<option>Medium Well</option>
+								<option>Well</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">Side</label> <select
+								class="form-control" id="updateModalSide">
+								<option value="" selected disabled hidden>Select Side</option>
+								<option>Sweet Potato Fries - €4.99</option>
+								<option>Steakhouse Fries - €3.99</option>
+								<option>Seasonal Veg - €2.99</option>
+								<option>Fondant Potatoes €4.99</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">Sauce</label> <select
+								class="form-control" id="updateModalSauce">
+								<option value="" selected disabled hidden>Select Sauce</option>
+								<option>Peppercorn Sauce</option>
+								<option>Bearnaise</option>
+								<option>Chimichurri</option>
+								<option>Salsa Verde</option>
+								<option>Bordelaise</option>
+							</select>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" id="cancelUpdate"
+						data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" id="saveOrderChanges">Save
+						changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Bootstrap core JavaScript -->
+	<script src="./resources/vendor/jquery/jquery.min.js"></script>
+	<script src="./resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Plugin JavaScript -->
+	<script src="./resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+	<script
+		src="./resources/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+	<!-- Custom scripts for this template -->
+	<script src="./resources/js/creative.min.js"></script>
+	<script src="./resources/js/logout.js" /></script>
+	<script src="./resources/js/authentication.js" /></script>
+	<script src="./resources/js/makingOrder.js" /></script>
+</body>
+</html>
