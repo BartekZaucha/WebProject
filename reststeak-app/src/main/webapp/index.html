@@ -34,17 +34,21 @@
 	<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3"
 		id="mainNav">
 		<div class="container">
-			<button class="navbar-toggler navbar-toggler-right" type="button"
-				data-toggle="collapse" data-target="#navbarResponsive"
-				aria-controls="navbarResponsive" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto my-2 my-lg-0">
+					<li class="nav-item"><a class="nav-link js-scroll-trigger"
+						href="#top">Login</a></li>
+					<li class="nav-item"><a class="nav-link js-scroll-trigger"
+						href="#menu">Menu</a></li>
+					<li class="nav-item"><a class="nav-link js-scroll-trigger"
+						href="#contact">Contact</a></li>
+				</ul>
+			</div>
 		</div>
 	</nav>
 
 	<!-- Masthead -->
-	<header class="masthead">
+	<header class="masthead" id="top">
 		<div class="container h-100">
 			<div
 				class="row h-100 align-items-center justify-content-center text-center">
@@ -54,8 +58,9 @@
 					<hr class="divider my-4">
 				</div>
 				<div class="col-lg-8 align-self-baseline">
-					<p class="text-white-75 font-weight-light mb-5">New Steakhouse in the heart of Athlone</p>
-					<a class="btn btn-primary btn-xl js-scroll-trigger"
+					<p class="text-white-75 font-weight-light mb-5">New Steakhouse
+						in the heart of Athlone</p>
+					<a class="btn btn-primary btn-xl js-scroll-trigger" id="loginButton"
 						data-toggle="modal" data-target="#loginModal">Login</a>
 				</div>
 			</div>
@@ -97,6 +102,102 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- Menu Section -->
+	<section class="page-section" id="menu">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-8 text-center">
+					<h2 class="mt-0">MENU</h2>
+					<hr class="divider my-4">
+					<h6 class="mt-0">*All our steaks will be done to your liking accompanied with one of our signature sauces</h6>
+					<br>
+					<h5 class="mt-0">STEAKS</h5>
+					<table id="dtOrderList" class="table">
+						<thead>
+							<tr>
+								<th scope="col">Steak</th>
+								<th scope="col">Price</th>
+							</tr>
+						</thead>
+						<tbody id="menu Table">
+							<tr>
+								<td>10oz Rib Eye</td>
+								<td>€19.99</td>
+							</tr>
+							<tr>
+								<td>8oz Fillet</td>
+								<td>€24.99</td>
+							</tr>
+							<tr>
+								<td>8oz Sirloin</td>
+								<td>€19.99</td>
+							</tr>
+							<tr>
+								<td>10oz Sirloin</td>
+								<td>€22.99</td>
+							</tr>
+							<tr>
+								<td>16oz T-Bone</td>
+								<td>€28.99</td>
+							</tr>
+						</tbody>
+					</table>
+					<hr class="divider my-4">
+					<h5 class="mt-0">SIDES</h5>
+					<table id="dtOrderList" class="table">
+						<thead>
+							<tr>
+								<th scope="col">Side</th>
+								<th scope="col">Price</th>
+							</tr>
+						</thead>
+						<tbody id="menu Table">
+							<tr>
+								<td>Sweet Potato Fries</td>
+								<td>€4.99</td>
+							</tr>
+							<tr>
+								<td>Steakhouse Fries</td>
+								<td>€3.99</td>
+							</tr>
+							<tr>
+								<td>Seasonal Veg</td>
+								<td>€2.99</td>
+							</tr>
+							<tr>
+								<td>Fondant Potatoes</td>
+								<td>€4.99</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</section>
+  
+	<!-- Contact Section -->
+	<section class="page-section bg-dark text-white" id="contact">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-8 text-center">
+					<h2 class="mt-0">Book a table</h2>
+					<hr class="divider my-4">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 ml-auto text-center mb-5 mb-lg-0">
+					<i class="fas fa-phone fa-3x mb-3 text-muted"></i>
+					<div>+1 (202) 555-0149</div>
+				</div>
+				<div class="col-lg-4 mr-auto text-center">
+					<i class="fas fa-envelope fa-3x mb-3 text-muted"></i>
+					<!-- Make sure to change the email address in anchor text AND the link below! -->
+					<a class="d-block" href="#top">athloneSteakHouse@email.com</a>
+				</div>
+			</div>
+		</div>
+	</section>
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="./resources/vendor/jquery/jquery.min.js"></script>

@@ -25,6 +25,7 @@ var saveOrder = function() {
 			$('#orderModal').modal('toggle');
 		},
 		error : function(data, textStatus, jqXHR) {
+			alert("Please fill in all fields");
 			alert("Error: " + errorThrown);
 		}
 	});
@@ -79,7 +80,9 @@ var findAll = function() {
 	});
 };
 
-
+/*
+ * DATA TABLE 
+ */
 var renderList = function(orderList) {
 	console.log("renderList");
 	$.each(orderList,function(index, order) {
@@ -102,65 +105,52 @@ var renderList = function(orderList) {
 				+ '" class="btn btn-primary" id="'
 				+ order.id
 				+ '" data-toggle="modal" data-target="#updateOrderModal">Update</button>'
-				+ '<td></tr>');
-		$(document).on("click",'#updateOrderModal', function(){
-			
-	                  $('.modal').on("click",'#saveOrderChanges', function(){
-	                	  updateOrder(id);
-	                	  location.reload();
-
-	                  });
+				+ '</td><td>'
+				+ '<button type="button" id="deleteOrder'
+				+ order.id
+				+ '" class="btn btn-danger" id=""'
+				+ order.id
+				+ '>DELETE</button>'
+				+ '</td></tr>');
+		
+		$(document).on("click",'#updateOrder' + order.id, function(){
+			$('.modal').on("click",'#saveOrderChanges', function(){
+				updateOrder(order.id);
+	            location.reload();
+	        });
+		})
+		$(document).on("click",'#deleteOrder' + order.id, function(){
+			deleteOrder(order.id);
+			location.reload();
 		})
 	});
 	var table = $('#dtOrderList').DataTable();
 };
 
-
-/*
- * GET ORDER
- */
-var findOrderById = function() {
-	console.log('findOrderById');
-	$.ajax({
-		type : 'GET',
-		url : rootURL + + $('#test').val(),
-		dataType : "json",
-		success : function(data) {
-			$('#updateSteakOrdered').html(data.steak);
-			$('#updateSteakTemperature').html(data.temperature);
-			$('#updateSteakSide').html(data.side);
-			$('#updateSteakSauce').html(data.sauce);
-		},
-		error : function(data, textStatus, jqXHR) {
-			alert("Error: " + errorThrown);
-		}
-	});
-};
-
 /*
  * UPDATE ORDER
  */
-
-var updateOrder= function () {
+var updateOrder= function (id) {
 	console.log('updateOrder');
 	$.ajax({
 		type: 'PUT',
 		contentType: 'application/json',
-		url : rootURL + '/' + $('#test').val(),
+		url : rootURL + '/' + id,
 		dataType: "json",
-		data: formToJSONUpdate(),
+		data: formToJSONUpdate(id),
 		success: function(data, textStatus, jqXHR){
-			alert('Order updated successfully');
                     
 		},
 		error: function(jqXHR, textStatus, errorThrown){
+			alert("Please fill in all fields");
 			alert('Order error: ' + textStatus);
 		}
 	});
 };
 
-var formToJSONUpdate = function() {
+var formToJSONUpdate = function(id) {
 	return JSON.stringify({
+		"id" : id,
 		"steak" : $('#updateModalSteak').val(),
 		"temperature" : $('#updateModalTemperature').val(),
 		"side" : $('#updateModalSide').val(),
@@ -168,6 +158,7 @@ var formToJSONUpdate = function() {
 		"orderStatus" : "Processing"
 	});
 };
+
 /*
  * HIDE/SHOW DIVs
  */

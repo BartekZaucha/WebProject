@@ -84,6 +84,41 @@
 		</div>
 	</header>
 
+	<!-- Update Order Modal-->
+	<div id="employeeUpdateModal" class="modal fade bd-example-modal-lg"
+		tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="userUpdateModalTitle">Update Order</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="employeeUpdateModalForm">
+						<div class="form-group">
+							<label for="exampleInputPassword1">Status</label> <select
+								class="form-control" id="updateModalStatus">
+								<option value="" selected disabled hidden>Select Status</option>
+								<option>Processing</option>
+								<option>In Progress</option>
+								<option>Done</option>
+							</select>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" id="cancelUpdate"
+						data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" id="saveOrderChanges">Save
+						changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- Bootstrap core JavaScript -->
 	<script src="./resources/vendor/jquery/jquery.min.js"></script>
 	<script src="./resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
