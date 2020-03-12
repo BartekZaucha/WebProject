@@ -1,4 +1,4 @@
-activeProfiles=
+activeProfiles=arq-wildfly-remote, jacoco
 eclipse.preferences.version=1
 resolveWorkspaceProjects=true
 version=1
