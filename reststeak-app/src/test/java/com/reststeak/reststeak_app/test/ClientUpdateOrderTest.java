@@ -15,6 +15,7 @@ import com.reststeak.reststeak_app.model.Orders;
 import com.reststeak.reststeak_app.data.OrdersDAO;
 import com.reststeak.reststeak_app.rest.OrdersWS;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -22,8 +23,8 @@ import cucumber.runtime.arquillian.CukeSpace;
 import cucumber.runtime.arquillian.api.Features;
 
 @RunWith(CukeSpace.class)
-@Features({ "src/test/resources/projectFeatures/clientOrder.feature" })
-public class ClientMakeOrderTest {
+@Features({ "src/test/resources/projectFeatures/clientUpdate.feature" })
+public class ClientUpdateOrderTest {
 
 	@Deployment
 	public static WebArchive createArchiveAndDeploy() {
@@ -45,27 +46,34 @@ public class ClientMakeOrderTest {
 	public void the_user_is_logged_in() throws Throwable {
 	}
 	
-	@When("^the customer creates his order \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
-	public void the_customer_creates_his_order(String arg1, String arg2, String arg3, String arg4) throws Throwable {
+	@When("^the customer created their order \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
+	public void the_customer_created_their_order(String arg1, String arg2, String arg3, String arg4) throws Throwable {
 		order = new Orders();
 	    order.setSteak(arg1);
 	    order.setTemperature(arg2);
 	    order.setSide(arg3);
 	    order.setSauce(arg4);
 	    order.setOrderStatus("Processing");
+	    ordersWS.saveOrder(order);
 	}
 
-	@When("^they click Make Order button$")
-	public void they_click_Make_Order_button() throws Throwable {
-		response = ordersWS.saveOrder(order);
+	@When("^they click UPDATE button$")
+	public void they_click_UPDATE_button() throws Throwable {
+	} 
+
+	@And("^update their order \"([^\"]*)\"$")
+	public void update_their_order(String arg1) throws Throwable {
+		order.setSteak(arg1);
+		response = ordersWS.updateOrder(order);
 	}
 
 	@Then("^a confirmation modal will appear$")
 	public void a_confirmation_modal_will_appear() throws Throwable {
 	}
 
-	@Then("^when the customer clicks Confirm the order will be made$")
-	public void when_the_customer_clicks_Confirm_the_order_will_be_made() throws Throwable {
-		assertEquals(201, response.getStatus());
+	@Then("^when the customer clicks Confirm the order will be updated$")
+	public void when_the_customer_clicks_Confirm_the_order_will_be_updated() throws Throwable {
+		assertEquals(200, response.getStatus());
+		ordersWS.deleteOrder(order.getId());
 	}
 }

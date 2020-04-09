@@ -1,9 +1,5 @@
 var rootURL = "http://localhost:8080/reststeak-app/rest/orders";
 var id;
-/*var steak;
-var temperature;
-var side;
-var sauce;*/
 
 /*
  * SAVE ORDER 
@@ -25,8 +21,9 @@ var saveOrder = function() {
 			$('#orderModal').modal('toggle');
 		},
 		error : function(data, textStatus, jqXHR) {
-			alert("Please fill in all fields");
-			alert("Error: " + errorThrown);
+			document.getElementById("errorBodyTitle").innerHTML = "Error";
+      		document.getElementById("errorBodyText").innerHTML = "Please select all fields";
+    		$('#errorModal').modal('show');
 		}
 	});
 };
@@ -57,14 +54,12 @@ var deleteOrder = function(id) {
 
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
-			alert('error: ' + errorThrown);
 		}
 	});
 };
 
 $(document).on("click", '#deleteOrder', function() {
 	deleteOrder(id);
-	location.reload();
 });
 
 /*
@@ -102,26 +97,74 @@ var renderList = function(orderList) {
 				+ '</td><td>'
 				+ '<button type="button" id="updateOrder'
 				+ order.id
-				+ '" class="btn btn-primary" id="'
+				+ '" class="btn btn-primary" id=""'
 				+ order.id
-				+ '" data-toggle="modal" data-target="#updateOrderModal">Update</button>'
+				+ '>UPDATE</button>'
 				+ '</td><td>'
 				+ '<button type="button" id="deleteOrder'
 				+ order.id
 				+ '" class="btn btn-danger" id=""'
 				+ order.id
 				+ '>DELETE</button>'
+				+ '</td><td>'
+				+ '<button type="button" id="payForOrder'
+				+ order.id
+				+ '" class="btn btn-success" id=""'
+				+ order.id
+				+ '>PAY</button>'
 				+ '</td></tr>');
-		
 		$(document).on("click",'#updateOrder' + order.id, function(){
-			$('.modal').on("click",'#saveOrderChanges', function(){
-				updateOrder(order.id);
-	            location.reload();
-	        });
+			if(order.orderStatus == "In Progress"){
+				document.getElementById("errorBodyTitle").innerHTML = "Error";
+          		document.getElementById("errorBodyText").innerHTML = "Your order is in progress so it cannot be changed";
+        		$('#errorModal').modal('show');
+			}else if(order.orderStatus == "Done"){
+				document.getElementById("errorBodyTitle").innerHTML = "Error";
+          		document.getElementById("errorBodyText").innerHTML = "Your order is ready so it cannot be changed";
+        		$('#errorModal').modal('show');
+			}else{
+				$('#updateOrderModal').modal('toggle');
+				$('.modal').on("click",'#saveOrderChanges', function(){
+					updateOrder(order.id);
+			        location.reload();
+			    });
+			}
 		})
 		$(document).on("click",'#deleteOrder' + order.id, function(){
-			deleteOrder(order.id);
-			location.reload();
+			if(order.orderStatus == "In Progress"){
+				document.getElementById("errorBodyTitle").innerHTML = "Error";
+          		document.getElementById("errorBodyText").innerHTML = "Your order is in progress so it cannot be deleted";
+        		$('#errorModal').modal('show');
+			}else if(order.orderStatus == "Done"){
+				document.getElementById("errorBodyTitle").innerHTML = "Error";
+          		document.getElementById("errorBodyText").innerHTML = "Your order is ready so it cannot be deleted";
+        		$('#errorModal').modal('show');
+			}else{
+				document.getElementById("warrningBodyTitle").innerHTML = "Warrning";
+          		document.getElementById("warrningBodyText").innerHTML = "You are about to delete your order";
+        		$('#warrningModal').modal('show');
+        		$('#deleteButton').click(function() {
+        			deleteOrder(order.id);
+        			location.reload();
+        		});
+			}
+		})
+		$(document).on("click",'#payForOrder' + order.id, function(){
+			if(order.orderStatus == "Processing" || order.orderStatus == "In Progress"){
+				document.getElementById("errorBodyTitle").innerHTML = "Error";
+          		document.getElementById("errorBodyText").innerHTML = "Your order is not ready! Please wait.";
+        		$('#errorModal').modal('show');
+			}else{
+        		$('#payModal').modal('show');
+        		$('#finishOrderButton').click(function() {
+        			if($('#payName').val() == "" || $('#payCard').val() == "" || $('#payCvc').val() == ""){
+        				
+        			}else{
+        				deleteOrder(order.id);
+        				location.reload();
+        			}
+        		});
+			}
 		})
 	});
 	var table = $('#dtOrderList').DataTable();
@@ -139,11 +182,8 @@ var updateOrder= function (id) {
 		dataType: "json",
 		data: formToJSONUpdate(id),
 		success: function(data, textStatus, jqXHR){
-                    
 		},
 		error: function(jqXHR, textStatus, errorThrown){
-			alert("Please fill in all fields");
-			alert('Order error: ' + textStatus);
 		}
 	});
 };
@@ -164,8 +204,8 @@ var formToJSONUpdate = function(id) {
  */
 $(document).ready(function() {
 	findAll();
-	$("#menuPanel").show();
-	$("#myOrderPanel").hide();
+	$("#menuPanel").hide();
+	$("#myOrderPanel").show();
 	$('#menu').click(function() {
 		$("#menuPanel").show();
 		$("#myOrderPanel").hide();

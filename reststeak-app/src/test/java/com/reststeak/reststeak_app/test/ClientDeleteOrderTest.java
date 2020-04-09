@@ -22,8 +22,8 @@ import cucumber.runtime.arquillian.CukeSpace;
 import cucumber.runtime.arquillian.api.Features;
 
 @RunWith(CukeSpace.class)
-@Features({ "src/test/resources/projectFeatures/clientOrder.feature" })
-public class ClientMakeOrderTest {
+@Features({ "src/test/resources/projectFeatures/clientDelete.feature" })
+public class ClientDeleteOrderTest {
 
 	@Deployment
 	public static WebArchive createArchiveAndDeploy() {
@@ -45,27 +45,29 @@ public class ClientMakeOrderTest {
 	public void the_user_is_logged_in() throws Throwable {
 	}
 	
-	@When("^the customer creates his order \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
-	public void the_customer_creates_his_order(String arg1, String arg2, String arg3, String arg4) throws Throwable {
+	@When("^the customer created their order \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
+	public void the_customer_created_their_order(String arg1, String arg2, String arg3, String arg4) throws Throwable {
 		order = new Orders();
 	    order.setSteak(arg1);
 	    order.setTemperature(arg2);
 	    order.setSide(arg3);
 	    order.setSauce(arg4);
 	    order.setOrderStatus("Processing");
+	    ordersWS.saveOrder(order);
 	}
 
-	@When("^they click Make Order button$")
-	public void they_click_Make_Order_button() throws Throwable {
-		response = ordersWS.saveOrder(order);
+	@When("^they click DELETE button$")
+	public void they_click_DELETE_button() throws Throwable {
+		response = ordersWS.deleteOrder(order.getId());
 	}
 
 	@Then("^a confirmation modal will appear$")
 	public void a_confirmation_modal_will_appear() throws Throwable {
 	}
 
-	@Then("^when the customer clicks Confirm the order will be made$")
-	public void when_the_customer_clicks_Confirm_the_order_will_be_made() throws Throwable {
-		assertEquals(201, response.getStatus());
+	@Then("^when the customer clicks Confirm the order will be deleted$")
+	public void when_the_customer_clicks_Confirm_the_order_will_be_deleted() throws Throwable {
+		assertEquals(204, response.getStatus());
 	}
+	
 }

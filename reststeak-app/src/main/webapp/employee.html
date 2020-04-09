@@ -63,7 +63,7 @@
 					<h1 class="text-uppercase text-white font-weight-bold">Orders</h1>
 					<hr class="divider my-4">
 				</div>
-				<div class="col-lg-8 align-self-baseline">
+				<div class="col-lg-12 align-self-baseline">
 					<table id="dtOrderList" class="table table-dark">
 						<thead>
 							<tr>
@@ -85,7 +85,7 @@
 	</header>
 
 	<!-- Update Order Modal-->
-	<div id="employeeUpdateModal" class="modal fade bd-example-modal-lg"
+	<div id="updateOrderModal" class="modal fade bd-example-modal-lg"
 		tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
 		aria-hidden="true">
 		<div class="modal-dialog modal-lg">
@@ -98,7 +98,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form id="employeeUpdateModalForm">
+					<form id="userUpdateModalForm">
 						<div class="form-group">
 							<label for="exampleInputPassword1">Status</label> <select
 								class="form-control" id="updateModalStatus">
@@ -111,14 +111,15 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" id="cancelUpdate"
+					<button type="button" class="btn btn-secondary mr-3" id="cancelUpdate"
 						data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary" id="saveOrderChanges">Save
+					<button type="button" class="btn btn-primary mr-3" id="saveOrderChanges">Save
 						changes</button>
 				</div>
 			</div>
 		</div>
 	</div>
+
 	<!-- Bootstrap core JavaScript -->
 	<script src="./resources/vendor/jquery/jquery.min.js"></script>
 	<script src="./resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -132,8 +133,7 @@
 	<script src="./resources/js/creative.min.js"></script>
 	<script src="./resources/js/logout.js" /></script>
 	<script src="./resources/js/authentication.js" /></script>
-	<script src="./resources/js/dataTable.js" /></script>
-	<!-- <script src="./resources/js/jquery.dataTables.js" /></script> -->
+	<script src="./resources/js/employee.js" /></script>
 </body>
 
 </html>

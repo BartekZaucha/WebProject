@@ -22,8 +22,8 @@ import cucumber.runtime.arquillian.CukeSpace;
 import cucumber.runtime.arquillian.api.Features;
 
 @RunWith(CukeSpace.class)
-@Features({ "src/test/resources/projectFeatures/clientOrder.feature" })
-public class ClientMakeOrderTest {
+@Features({ "src/test/resources/projectFeatures/employeeGetListOfOrders.feature" })
+public class EmployeeGetListOfOrdersTest {
 
 	@Deployment
 	public static WebArchive createArchiveAndDeploy() {
@@ -40,13 +40,13 @@ public class ClientMakeOrderTest {
 
 	Response response;
 	Orders order;
-
-	@Given("^the user is logged in$")
-	public void the_user_is_logged_in() throws Throwable {
-	}
 	
-	@When("^the customer creates his order \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
-	public void the_customer_creates_his_order(String arg1, String arg2, String arg3, String arg4) throws Throwable {
+	@Given("^the employee is logged in$")
+	public void the_employee_is_logged_in() throws Throwable {
+	}
+
+	@When("^the customer created their order \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
+	public void the_customer_created_their_order(String arg1, String arg2, String arg3, String arg4) throws Throwable {
 		order = new Orders();
 	    order.setSteak(arg1);
 	    order.setTemperature(arg2);
@@ -55,17 +55,10 @@ public class ClientMakeOrderTest {
 	    order.setOrderStatus("Processing");
 	}
 
-	@When("^they click Make Order button$")
-	public void they_click_Make_Order_button() throws Throwable {
-		response = ordersWS.saveOrder(order);
+	@Then("^the employee can get a list of containing that order$")
+	public void the_employee_can_get_a_list_of_containing_that_order() throws Throwable {
+		response = ordersWS.findAllOrders();
+		assertEquals(200, response.getStatus());
 	}
 
-	@Then("^a confirmation modal will appear$")
-	public void a_confirmation_modal_will_appear() throws Throwable {
-	}
-
-	@Then("^when the customer clicks Confirm the order will be made$")
-	public void when_the_customer_clicks_Confirm_the_order_will_be_made() throws Throwable {
-		assertEquals(201, response.getStatus());
-	}
 }

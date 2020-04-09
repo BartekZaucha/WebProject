@@ -5,8 +5,9 @@ var validate = function() {
 	var username = $('#inputUsername').val();
 	var password = $('#inputPassword').val();
 	if ($('#inputUsername').val() == "" || $('#inputPassword').val() == "") {
-		alert("Please fill in all fields");
-		// $('#loginErrorModal').modal('show');
+		document.getElementById("errorBodyTitle").innerHTML = "Error";
+  		document.getElementById("errorBodyText").innerHTML = "Please fill in all fields";
+		$('#errorModal').modal('show');
 	} else {
 		var user = getUser(username);
 		if (user != null) {
@@ -26,7 +27,9 @@ var validate = function() {
 					return false;
 				}
 			} else {
-				alert("Invalid Login");
+				document.getElementById("errorBodyTitle").innerHTML = "Error";
+		  		document.getElementById("errorBodyText").innerHTML = "Invalid Login";
+				$('#errorModal').modal('show');
 			}
 		}
 	}
@@ -47,7 +50,9 @@ var getUser = function(userName) {
 					console.log("DATA: " + data);
 					user = data;
 				} else
-					alert("Invalid Login");
+					document.getElementById("errorBodyTitle").innerHTML = "Error";
+		  			document.getElementById("errorBodyText").innerHTML = "Invalid Login";
+		  			$('#errorModal').modal('show');
 			},
 			error : function(data) {
 				alert("Invalid Login");

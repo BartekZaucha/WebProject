@@ -60,8 +60,8 @@
 				<div class="col-lg-8 align-self-baseline">
 					<p class="text-white-75 font-weight-light mb-5">New Steakhouse
 						in the heart of Athlone</p>
-					<a class="btn btn-primary btn-xl js-scroll-trigger" id="loginButton"
-						data-toggle="modal" data-target="#loginModal">Login</a>
+					<a class="btn btn-primary btn-xl js-scroll-trigger"
+						id="loginButton" data-toggle="modal" data-target="#loginModal">Login</a>
 				</div>
 			</div>
 		</div>
@@ -110,7 +110,8 @@
 				<div class="col-lg-8 text-center">
 					<h2 class="mt-0">MENU</h2>
 					<hr class="divider my-4">
-					<h6 class="mt-0">*All our steaks will be done to your liking accompanied with one of our signature sauces</h6>
+					<h6 class="mt-0">*All our steaks will be done to your liking
+						accompanied with one of our signature sauces</h6>
 					<br>
 					<h5 class="mt-0">STEAKS</h5>
 					<table id="dtOrderList" class="table">
@@ -175,7 +176,7 @@
 			</div>
 		</div>
 	</section>
-  
+
 	<!-- Contact Section -->
 	<section class="page-section bg-dark text-white" id="contact">
 		<div class="container">
@@ -199,6 +200,24 @@
 		</div>
 	</section>
 
+	<!-- Error Modal -->
+	<div class="modal fade" id="errorModal" tabindex="-1" role="dialog"
+		aria-labelledby="errorModalTitle" aria-hidden="true">
+		<div class="modal-dialog modal-confirm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title text-center" id="errorBodyTitle"></h4>
+				</div>
+				<div class="modal-body">
+					<p class="text-center" id="errorBodyText"></p>
+				</div>
+				<div class="modal-footer">
+					<button id="warrningButton" class="btn btn-danger btn-block"
+						data-dismiss="modal">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- Bootstrap core JavaScript -->
 	<script src="./resources/vendor/jquery/jquery.min.js"></script>
 	<script src="./resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
